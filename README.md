@@ -1,4 +1,4 @@
-![MOVIESTREAMZ Logo](https://github.com/user-attachments/assets/225fba2f-ef5f-46a1-a1ab-028cff07b54a)
+![MOVIESTREAMZ Logo](https://github.com/833M0L3/moviestreamz/blob/main/screenshots/logo.jpg?raw=true)
 
 MOVIESTREAMZ is a video streaming platform designed to provide users with a seamless and high-quality video streaming experience. This project leverages advanced video compression algorithms, modern technologies, and robust frameworks to deliver efficient video content while ensuring minimal storage and bandwidth requirements.
 
@@ -105,12 +105,12 @@ Follow these steps to set up the MOVIESTREAMZ project on your local machine:
 ---
 
 ### Screenshots
-![image](https://github.com/user-attachments/assets/628d0a9d-2509-40bd-b21a-be8f33a3069b)
-![image](https://github.com/user-attachments/assets/93893dca-2efe-44ad-b92b-a22cd588efac)
-![image](https://github.com/user-attachments/assets/61b8497a-b04f-43d9-8413-261dbb824c36)
-![image](https://github.com/user-attachments/assets/4288709d-9553-479b-94fe-d1fb561dd25c)
-![image](https://github.com/user-attachments/assets/942a3727-3b3d-4750-9ae8-e9e9f3b1ec4d)
-![image](https://github.com/user-attachments/assets/eb4585b0-7670-46cc-a7b4-0aa98288ef5f)
+![image](https://github.com/833M0L3/moviestreamz/blob/main/screenshots/home.jpg?raw=true)
+![image](https://github.com/833M0L3/moviestreamz/blob/main/screenshots/player.jpg?raw=true)
+![image](https://github.com/833M0L3/moviestreamz/blob/main/screenshots/login.jpg?raw=true)
+![image](https://github.com/833M0L3/moviestreamz/blob/main/screenshots/signup.jpg?raw=true)
+![image](https://github.com/833M0L3/moviestreamz/blob/main/screenshots/plans.jpg?raw=true)
+![image](https://github.com/833M0L3/moviestreamz/blob/main/screenshots/dashboard.jpg?raw=true)
 
 
 ### References
