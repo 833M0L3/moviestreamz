@@ -1,0 +1,30 @@
+# Ignore Visual Studio Code files
+.vscode/
+.vscode/*
+
+# Ignore Django specific files
+*.pyc
+__pycache__/
+db.sqlite3
+*.log
+*.pot
+*.py[cod]
+*.sqlite3
+*.pyo
+*.pyd
+*.env
+*.venv
+*.egg-info/
+*.egg
+*.coverage
+.coverage.*
+.cache
+*.mo
+*.migrations/
+staticfiles/
+media/
+node_modules/
+.envrc
+.env.*
+streamz/
+tempCodeRunnerFile.py

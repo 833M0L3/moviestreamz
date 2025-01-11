@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <title>Movie Streamz</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #141414; /* Netflix-like dark background */
+      color: white;
+    }
+  
+    .top-menu {
+      background-color: #333;
+      padding: 10px;
+    }
+  
+    .top-menu ul {
+      display: flex;
+      justify-content: center;
+    }
+  
+    .top-menu li {
+      margin: 0 20px;
+    }
+  
+    .top-menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+  
+    .top-menu a:hover {
+      color: #b5d2ff;
+    }
+  
+    .main-menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #141414;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 10px 20px;
+    }
+  
+    .main-menu .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color:rgb(244, 240, 43);
+    }
+  
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+  
+    .search-bar input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: white;
+      margin-left: 10px;
+    }
+  
+    .search-bar input:focus {
+      outline: none;
+      background-color: #555;
+    }
+  
+    .user-info {
+      color: white;
+      font-size: 14px;
+    }
+  
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+    }
+  
+    .post {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+      background-color: #333;
+    }
+  
+    .post:hover {
+      transform: scale(1.05);
+    }
+  
+    .post img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+    .post p {
+      position: absolute;
+      bottom: 20px;
+      left: 10px;
+      right: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+  
+    .duration {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      font-size: 12px;
+      padding: 5px;
+      border-radius: 5px;
+    }
+  
+    footer {
+      background-color: #141414;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+  
+    footer a {
+      color: #b5d2ff;
+      text-decoration: none;
+    }
+  
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>  
+</head>
+
+<body>
+
+  <!-- Top Menu -->
+
+  <!-- Main Menu -->
+  <nav class="main-menu">
+    <div class="logo">MovieStreamz</div>
+    <div class="user-info">
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'dashboard' %}" class="text-blue-500 hover:underline">
+          Welcome, {{ request.user.username }}
+        </a>
+        <a href="{% url 'logout' %}" class="ml-4 text-red-500 hover:underline">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login</a>
+        <a href="{% url 'user_signup' %}" class="ml-4 text-blue-500 hover:underline">Sign Up</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <section class="catalog">
+      {% if videos %}
+        {% for video in videos %}
+          <div class="post">
+            <a href="{% url 'hls_video_player' video.slug %}">
+              <img src="{{ video.thumbnail.url }}" alt="{{ video.name }}" />
+              <p>{{ video.name }}</p>
+            </a>
+           <!-- <span class="duration">{{ video.duration }}</span> --> <!-- Duration Label -->
+          </div>
+        {% endfor %}
+      {% else %}
+        <h3 class="text-center mx-auto">No Videos Found</h3>
+      {% endif %}
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> <span>Movie Streamz</span> All Rights Reserved</p>
+  </footer>
+
+</body>
+
+</html>

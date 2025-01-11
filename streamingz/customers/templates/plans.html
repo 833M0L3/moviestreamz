@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Plan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #141414;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .header {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 0;
+            text-align: left;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(244, 240, 43);;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: rgb(244, 240, 43);;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .plan-card {
+            background-color: #222;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            width: 300px;
+            text-align: center;
+        }
+
+        .plan-card h2 {
+            font-size: 24px;
+            color: rgb(244, 240, 43);;
+            margin-bottom: 20px;
+        }
+
+        .plan-card p {
+            font-size: 16px;
+            color: #b5b5b5;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .btn-subscribe {
+            width: 100%;
+            padding: 10px;
+            background-color: rgb(244, 240, 43);;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-subscribe:hover {
+            background-color: rgb(244, 240, 43);;
+        }
+
+        .plan-card .features {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #b5b5b5;
+        }
+
+        .plan-card .features li {
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background-color: #222;
+            color: #b5b5b5;
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-size: 12px;
+        }
+
+        .footer a {
+            color: rgb(244, 240, 43);;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <a href="{% url 'all_videos' %}">
+            <h1>MovieStreamz</h1>
+        </a>
+    </div>
+
+    <!-- Plans Section -->
+    <div class="container">
+        <!-- Standard Plan -->
+        <div class="plan-card">
+            <h2>Standard</h2>
+            <p>For individuals who want high-quality streaming.</p>
+            <div class="price">Rs 100</div>
+            <ul class="features">
+                <li>1 month</li>
+            </ul>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="package_id" value="1">
+                <input type="hidden" name="package_name" value="Standard">
+            
+                <!-- Payment Gateway Selection -->
+                <div class="form-group mb-3">
+                    <label for="gateway">Choose Payment Gateway:</label>
+                    <select id="gateway" name="gateway" class="form-select">
+                        <option value="khalti">Khalti</option>
+                        <option value="esewa">eSewa</option>
+                    </select>
+                </div>
+            
+                <button type="submit" class="btn-subscribe">Subscribe</button>
+            </form>
+        </div>
+
+        <!-- Basic Plan -->
+        <div class="plan-card">
+            <h2>Basic</h2>
+            <p>For those who want to try streaming at an affordable price.</p>
+            <div class="price">Rs 399</div>
+            <ul class="features">
+                <li>3 months</li>
+            </ul>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="package_id" value="1">
+                <input type="hidden" name="package_name" value="Standard">
+            
+                <!-- Payment Gateway Selection -->
+                <div class="form-group mb-3">
+                    <label for="gateway">Choose Payment Gateway:</label>
+                    <select id="gateway" name="gateway" class="form-select">
+                        <option value="khalti">Khalti</option>
+                        <option value="esewa">eSewa</option>
+                    </select>
+                </div>
+            
+                <button type="submit" class="btn-subscribe">Subscribe</button>
+            </form>
+        </div>
+        <!-- Premium Plan -->
+        <div class="plan-card">
+            <h2>Premium</h2>
+            <p>For the best streaming experience.</p>
+            <div class="price">Rs 900</div>
+            <ul class="features">
+                <li>1 year</li>
+            </ul>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="package_id" value="1">
+                <input type="hidden" name="package_name" value="Standard">
+            
+                <!-- Payment Gateway Selection -->
+                <div class="form-group mb-3">
+                    <label for="gateway">Choose Payment Gateway:</label>
+                    <select id="gateway" name="gateway" class="form-select">
+                        <option value="khalti">Khalti</option>
+                        <option value="esewa">eSewa</option>
+                    </select>
+                </div>
+            
+                <button type="submit" class="btn-subscribe">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2024 MovieStreamz. All rights reserved. <a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a></p>
+    </div>
+</body>
+</html>

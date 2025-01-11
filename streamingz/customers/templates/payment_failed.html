@@ -1,0 +1,80 @@
+<!-- templates/payment_failed.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-out;
+        }
+        .container h1 {
+            color: #f44336;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        .cross {
+            font-size: 80px;
+            color: #f44336;
+            animation: shake 0.5s infinite;
+        }
+        .details {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-10px);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+            75% {
+                transform: translateX(-10px);
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cross">❌</div>
+        <h1>Payment Unsuccessful or Cancelled</h1>
+        <p class="details">Unfortunately, the payment could not be processed or was cancelled. Please try again.</p>
+        <p>Redirecting you to the home page...</p>
+        <script>
+            setTimeout(function(){
+                window.location.href = '/';  // Redirect to the homepage after 3 seconds
+            }, 3000);
+        </script>
+    </div>
+</body>
+</html>

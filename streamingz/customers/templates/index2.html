@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{ video.name }} - Movie Streamz</title>
+
+  <!-- Google Fonts and Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- External Libraries -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://vjs.zencdn.net/7.14.3/video.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Styles -->
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .video-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .notification {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px;
+      background-color:rgb(0, 0, 0);
+      color: #fff;
+      width: 350px;
+      height: 35px;
+      border-radius: 8px;
+    }
+
+    footer {
+      background-color:rgb(0, 0, 0);
+      padding: 20px;
+      color: white;
+      margin-top: auto; /* Push footer to bottom of page */
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body class="bg-[#141414] text-white overflow-x-hidden">
+  <!-- Main Navigation -->
+  <nav class="bg-[#141414] w-full h-[60px] md:h-[70px] flex items-center justify-between">
+    <div class="flex items-center">
+      <span class="text-3xl text-[#F4F02B] px-3 cursor-pointer md:hidden" onclick="Menu()">
+        <ion-icon name="menu-outline"></ion-icon>
+      </span>
+      <a href="/"><span class="text-2xl font-extrabold text-[#F4F02B] px-3">moviestreamz</span></a>
+    </div>
+  </nav>
+  
+  <!-- Main Content -->
+  <main class="h-full bg-lavender flex justify-center items-center">
+    <div class="video-container text-center">
+      <h1 class="text-4xl font-bold">{{ video.name }}</h1>
+      <br>
+      <video id="hls-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360" autoplay>
+        <source src="{{ hls_url }}" type="application/x-mpegURL">
+        <p class="vjs-no-js">To view this video, please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video</p>
+      </video>
+      <p>{{ video.created_at|date:"F d, Y" }}</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy;<script>document.write(new Date().getFullYear())</script> Movie Streamz. All Rights Reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    var player = videojs('hls-video');
+
+    // Check if HLS.js is supported
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource('{{ hls_url }}'); // Set the HLS stream URL
+      hls.attachMedia(player.tech().el());
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        player.play();
+      });
+    } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+      // For browsers that support HLS natively, like Safari
+      player.src({ type: 'application/x-mpegURL', src: '{{ hls_url }}' });
+      player.play();
+    } else {
+      console.error('HLS is not supported in this browser.');
+    }
+
+    function Menu() {
+      const expand = document.querySelector(".expand");
+      expand.classList.toggle("hidden");
+    }
+
+    function Notif() {
+      const notif = document.querySelector(".notification");
+      notif.style.display = "none";
+    }
+  </script>
+</body>
+
+</html>
